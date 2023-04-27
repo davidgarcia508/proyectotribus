@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrab/bootstrap.min.css">
-    <script src="js/bootstrab/bootstrap.min.js" defer></script>
-   <link rel="stylesheet" href="css/style.css">
+const URL_API ="data/settings.json";
 
-    <title>Document</title>
-</head>
-<body>
-  <div class="navContainer">
+function loadData(){
+    fetch(URL_API)
+        .then((Response)=>{
+            return Response.json();
+        })
+        .then((data)=>{
+            viewHTML(data);
+        })
+}
+function viewHTML(myData){
+    const navContainer = document.querySelector('#navContainer');
+    const {id,nombreTribu,puntos} = myData;
+    navContainer.innerHTML =/* HTML */`
+    <div class="navContainer">
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
             <img src="img/Screenshot from 2023-04-27 12-56-52.png" class="rounded-circle" alt="..." width="80px">
@@ -63,5 +65,6 @@
             </div>
           </div>
       </div>
-</body>
-</html>
+    `
+}
+customElements.innerHTML('nav-container',navContainer)
